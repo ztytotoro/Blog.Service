@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-class-decorator';
+import { Component, Vue } from "vue-class-decorator";
 
 @Component
 export default class Home extends Vue {}
