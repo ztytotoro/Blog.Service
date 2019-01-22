@@ -6,9 +6,10 @@
 
 <style lang="less">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Fira code", "Avenir", Helvetica, Arial, sans-serif, "Dengxian", "Microsoft Yahei";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: #626369;
+  
 }
 </style>
