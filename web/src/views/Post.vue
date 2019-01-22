@@ -8,7 +8,7 @@ import { Component, Vue } from "vue-class-decorator";
 @Component
 export default class Post extends Vue {
     public get content() {
-        return this.$md(`# Title=> 1\n* li\n* li\n你好[bing](https://www.bing.com)12321\`code => \`12321\n\nasdfsafasdfa`);
+        return this.$md(`# Title=> 1\n\nasdfsafasdfa\n\n* li\n* li\n你好[bing](https://www.bing.com)12321\`code => \`12321\n\nasdfsafasdfa`);
     }
 }
 </script>
@@ -17,6 +17,7 @@ export default class Post extends Vue {
 .post {
     display: flex;
     flex-direction: column;
+    padding: 0 15%;
     & h1 {
         text-align: center;
     }
