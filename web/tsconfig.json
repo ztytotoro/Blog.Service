@@ -7,9 +7,13 @@
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "typeRoots": [
+      "src/types"
+    ],
     "baseUrl": ".",
     "types": [
       "webpack-env",
