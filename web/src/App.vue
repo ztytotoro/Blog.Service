@@ -5,6 +5,10 @@
 </template>
 
 <style lang="less">
+html, body, #app {
+  height: 100%;
+}
+
 #app {
   font-family:  "Courier New", Helvetica, "Avenir", Arial, sans-serif, "Dengxian", "Microsoft Yahei";
   -webkit-font-smoothing: antialiased;
