@@ -3,11 +3,11 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
-import Md from "./plugins/markdown";
+import plugins from "./plugins/index";
 
 Vue.config.productionTip = false;
 
-Vue.use(Md);
+plugins.forEach(plugin => Vue.use(plugin));
 
 new Vue({
   router,
