@@ -12,5 +12,10 @@ import Page from "../components/Page.vue";
   }
 })
 export default class Home extends Vue {
+  private mounted() {
+    this.$fetch.GetPosts().then(response => {
+      console.log(response);
+    });
+  }
 }
 </script>
