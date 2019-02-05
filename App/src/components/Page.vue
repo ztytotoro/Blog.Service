@@ -1,5 +1,5 @@
 <template>
-    <div class="page">
+    <div class="page" v-cloak>
         <Navigation></Navigation>
         
         <div class="main">
@@ -28,6 +28,9 @@ export default class Page extends Vue {
 </script>
 
 <style lang="less">
+[v-cloak] {
+  display: none;
+}
 .page {
     display: flex;
     flex-direction: column;
