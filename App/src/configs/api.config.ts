@@ -1,1 +1,1 @@
-export default "http://localhost:56250";
+export default "https://api.github.com/graphql";

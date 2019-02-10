@@ -2,7 +2,7 @@
   <Page class="home">
     <ul class="post-list">
       <li class="post-item" v-for="post in posts" :key="post.id">
-        <PostCard></PostCard>
+        <PostCard :content="post.data.text"></PostCard>
       </li>
     </ul>
   </Page>

@@ -10,16 +10,23 @@
             <span class="tag">测试</span>
             <span class="tag">测试2</span>
         </div>
+        <div v-html="markedContent"></div>
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-class-decorator";
+import { Component, Vue, Prop } from "vue-class-decorator";
 
 @Component
 export default class PostCard extends Vue {
+    @Prop(String)
+    private content!: string;
     public Navigate() {
         this.$router.push("/post");
+    }
+
+    public get markedContent() {
+        return this.$md(this.content);
     }
 }
 </script>

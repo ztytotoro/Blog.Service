@@ -1,59 +1,32 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Server.Model;
+using Server.Models;
+using Server.DataAccess;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Server.Base;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Server.Controllers
 {
-    [Route("api/[controller]")]
-    public class PostController : Controller
+    public class PostController : BaseController<BlogContext, Post>
     {
+        public PostController(BlogContext context) : base(context, context.Post)
+        {
+        }
         // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<Post> Get()
+        public override ActionResult<IEnumerable<Post>> Get()
         {
-            return new Post[] {
-                new Post
-                {
-                    Id = 0,
-                    Title = "Hello World!",
-                    Author = "Yarn",
-                    Content = ""
-                },
-                new Post
-                {
-                    Id = 1,
-                    Title = "Primary C++",
-                    Author = "Yarn",
-                    Content = ""
-                }
-            };
+            return Ok(_table.Include(x => x.Tags).ToList());
         }
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public override ActionResult<Post> Get(int id)
         {
-            return "value";
-        }
-
-        // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Ok(_table.Where(x => x.Id == id).Include(x => x.Tags).Include(x => x.Comments).Include(x => x.Histories).FirstOrDefault());
         }
     }
 }

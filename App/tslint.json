@@ -19,6 +19,7 @@
     "eofline": false,
     "no-console": false,
     "max-line-length": false,
-    "arrow-parens": false
+    "arrow-parens": false,
+    "no-angle-bracket-type-assertion": false
   }
 }
