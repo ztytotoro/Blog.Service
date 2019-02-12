@@ -30,5 +30,6 @@ namespace Server.Models
         public List<Tag> Tags { get; set; }
         public List<Comment> Comments { get; set; }
         public List<PostHistory> Histories { get; set; }
+        public List<VisitRecord> VisitRecords { get; set; }
     }
 }

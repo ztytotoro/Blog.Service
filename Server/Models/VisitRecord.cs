@@ -20,8 +20,10 @@ namespace Server.Models
         public int? VisitorId { get; set; }
         public DateTime VisitTime { get; set; }
         public string VisitPath { get; set; }
+        public int PostId { get; set; }
         public int TimeOfStay { get; set; }
 
         public Visitor Visitor { get; set; }
+        public Post Post { get; set; }
     }
 }

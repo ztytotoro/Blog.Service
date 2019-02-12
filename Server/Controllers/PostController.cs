@@ -19,7 +19,15 @@ namespace Server.Controllers
         [HttpGet]
         public override ActionResult<IEnumerable<Post>> Get()
         {
-            return Ok(_table.Include(x => x.Tags).ToList());
+            return Ok(_table.Include(x => x.Tags).Include(x => x.VisitRecords).Select(p => new {
+                p.Author,
+                p.Title,
+                p.CreateTime,
+                p.LastEditTime,
+                p.Tags,
+                CommentsCount = p.Comments.Count,
+                VisitCount = p.VisitRecords.Count
+            }).ToList());
         }
 
         // GET api/<controller>/5
