@@ -18,5 +18,7 @@ namespace Server.Models
         public int PostId { get; set; }
         public DateTime EditTime { get; set; }
         public string Content { get; set; }
+
+        public Post Post { get; set; }
     }
 }

@@ -15,7 +15,10 @@ namespace Server.Models
     public class Comment : BaseEntity
     {
         public int PostId { get; set; }
+        public int VisitorId { get; set; }
         public string Content { get; set; }
-        public string Visitor { get; set; }
+
+        public Post Post { get; set; }
+        public Visitor Visitor { get; set; }
     }
 }
