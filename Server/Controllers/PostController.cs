@@ -19,14 +19,15 @@ namespace Server.Controllers
         [HttpGet]
         public override ActionResult<IEnumerable<Post>> Get()
         {
-            return Ok(_table.Include(x => x.Tags).Include(x => x.VisitRecords).Select(p => new {
+            return Ok(_table.Include(x => x.PostTags).ThenInclude(x => x.Tag).Include(x => x.VisitRecords).Select(p => new {
+                p.Id,
                 p.Author,
                 p.Title,
                 p.CreateTime,
                 p.LastEditTime,
-                p.Tags,
                 CommentsCount = p.Comments.Count,
-                VisitCount = p.VisitRecords.Count
+                VisitCount = p.VisitRecords.Count,
+                Tags = p.PostTags.Select(t => t.Tag.Name)
             }).ToList());
         }
 
@@ -34,7 +35,7 @@ namespace Server.Controllers
         [HttpGet("{id}")]
         public override ActionResult<Post> Get(int id)
         {
-            return Ok(_table.Where(x => x.Id == id).Include(x => x.Tags).Include(x => x.Comments).Include(x => x.Histories).FirstOrDefault());
+            return Ok(_table.Where(x => x.Id == id).Include(x => x.PostTags).Include(x => x.Comments).Include(x => x.Histories).FirstOrDefault());
         }
     }
 }

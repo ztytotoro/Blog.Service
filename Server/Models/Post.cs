@@ -18,6 +18,7 @@ namespace Server.Models
     {
         // 标题
         public string Title { get; set; }
+        public string Name { get; set; }
         // 作者
         public string Author { get; set; }
         // 创建时间
@@ -27,7 +28,7 @@ namespace Server.Models
         // 正文
         public string Content { get; set; }
 
-        public List<Tag> Tags { get; set; }
+        public List<PostTag> PostTags { get; set; }
         public List<Comment> Comments { get; set; }
         public List<PostHistory> Histories { get; set; }
         public List<VisitRecord> VisitRecords { get; set; }

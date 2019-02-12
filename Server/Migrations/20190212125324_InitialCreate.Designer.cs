@@ -3,12 +3,13 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.DataAccess;
 
 namespace Server.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20190208172110_InitialCreate")]
+    [Migration("20190212125324_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +27,13 @@ namespace Server.Migrations
 
                     b.Property<int>("PostId");
 
-                    b.Property<string>("Visitor");
+                    b.Property<int>("VisitorId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("VisitorId");
 
                     b.ToTable("Comment");
                 });
@@ -81,6 +84,8 @@ namespace Server.Migrations
 
                     b.HasKey("PostId", "TagId");
 
+                    b.HasIndex("TagId");
+
                     b.ToTable("PostTag");
                 });
 
@@ -91,11 +96,7 @@ namespace Server.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("PostId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PostId");
 
                     b.ToTable("Tag");
                 });
@@ -109,6 +110,8 @@ namespace Server.Migrations
 
                     b.Property<string>("Mac");
 
+                    b.Property<int>("PostId");
+
                     b.Property<int>("TimeOfStay");
 
                     b.Property<string>("VisitPath");
@@ -118,6 +121,10 @@ namespace Server.Migrations
                     b.Property<int?>("VisitorId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("VisitorId");
 
                     b.ToTable("VisitRecord");
                 });
@@ -144,25 +151,48 @@ namespace Server.Migrations
 
             modelBuilder.Entity("Server.Models.Comment", b =>
                 {
-                    b.HasOne("Server.Models.Post")
+                    b.HasOne("Server.Models.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Server.Models.Visitor", "Visitor")
+                        .WithMany()
+                        .HasForeignKey("VisitorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Server.Models.PostHistory", b =>
                 {
-                    b.HasOne("Server.Models.Post")
+                    b.HasOne("Server.Models.Post", "Post")
                         .WithMany("Histories")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Server.Models.Tag", b =>
+            modelBuilder.Entity("Server.Models.PostTag", b =>
                 {
-                    b.HasOne("Server.Models.Post")
+                    b.HasOne("Server.Models.Post", "Post")
                         .WithMany("Tags")
-                        .HasForeignKey("PostId");
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Server.Models.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Server.Models.VisitRecord", b =>
+                {
+                    b.HasOne("Server.Models.Post", "Post")
+                        .WithMany("VisitRecords")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Server.Models.Visitor", "Visitor")
+                        .WithMany()
+                        .HasForeignKey("VisitorId");
                 });
 #pragma warning restore 612, 618
         }

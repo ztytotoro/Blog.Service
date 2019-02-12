@@ -25,15 +25,16 @@ namespace Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PostTag",
+                name: "Tag",
                 columns: table => new
                 {
-                    PostId = table.Column<int>(nullable: false),
-                    TagId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySQL:AutoIncrement", true),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PostTag", x => new { x.PostId, x.TagId });
+                    table.PrimaryKey("PK_Tag", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,45 +52,6 @@ namespace Server.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Visitor", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "VisitRecord",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    Ip = table.Column<string>(nullable: true),
-                    Mac = table.Column<string>(nullable: true),
-                    VisitorId = table.Column<int>(nullable: true),
-                    VisitTime = table.Column<DateTime>(nullable: false),
-                    VisitPath = table.Column<string>(nullable: true),
-                    TimeOfStay = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_VisitRecord", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Comment",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    PostId = table.Column<int>(nullable: false),
-                    Content = table.Column<string>(nullable: true),
-                    Visitor = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Comment_Post_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Post",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,21 +76,83 @@ namespace Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tag",
+                name: "PostTag",
+                columns: table => new
+                {
+                    PostId = table.Column<int>(nullable: false),
+                    TagId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PostTag", x => new { x.PostId, x.TagId });
+                    table.ForeignKey(
+                        name: "FK_PostTag_Post_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Post",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PostTag_Tag_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tag",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comment",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    PostId = table.Column<int>(nullable: true)
+                    PostId = table.Column<int>(nullable: false),
+                    VisitorId = table.Column<int>(nullable: false),
+                    Content = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tag", x => x.Id);
+                    table.PrimaryKey("PK_Comment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tag_Post_PostId",
+                        name: "FK_Comment_Post_PostId",
                         column: x => x.PostId,
                         principalTable: "Post",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comment_Visitor_VisitorId",
+                        column: x => x.VisitorId,
+                        principalTable: "Visitor",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VisitRecord",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySQL:AutoIncrement", true),
+                    Ip = table.Column<string>(nullable: true),
+                    Mac = table.Column<string>(nullable: true),
+                    VisitorId = table.Column<int>(nullable: true),
+                    VisitTime = table.Column<DateTime>(nullable: false),
+                    VisitPath = table.Column<string>(nullable: true),
+                    PostId = table.Column<int>(nullable: false),
+                    TimeOfStay = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VisitRecord", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VisitRecord_Post_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Post",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_VisitRecord_Visitor_VisitorId",
+                        column: x => x.VisitorId,
+                        principalTable: "Visitor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -139,14 +163,29 @@ namespace Server.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comment_VisitorId",
+                table: "Comment",
+                column: "VisitorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PostHistory_PostId",
                 table: "PostHistory",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tag_PostId",
-                table: "Tag",
+                name: "IX_PostTag_TagId",
+                table: "PostTag",
+                column: "TagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VisitRecord_PostId",
+                table: "VisitRecord",
                 column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VisitRecord_VisitorId",
+                table: "VisitRecord",
+                column: "VisitorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -161,16 +200,16 @@ namespace Server.Migrations
                 name: "PostTag");
 
             migrationBuilder.DropTable(
-                name: "Tag");
-
-            migrationBuilder.DropTable(
-                name: "Visitor");
-
-            migrationBuilder.DropTable(
                 name: "VisitRecord");
 
             migrationBuilder.DropTable(
+                name: "Tag");
+
+            migrationBuilder.DropTable(
                 name: "Post");
+
+            migrationBuilder.DropTable(
+                name: "Visitor");
         }
     }
 }
