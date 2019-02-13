@@ -16,7 +16,6 @@ namespace Server.Models
     public class VisitRecord : BaseEntity
     {
         public string Ip { get; set; }
-        public string Mac { get; set; }
         public int? VisitorId { get; set; }
         public DateTime VisitTime { get; set; }
         public string VisitPath { get; set; }

@@ -7,7 +7,7 @@ import Config from "@/configs/footer.config";
 export default class Footer extends Vue {
     private render(h: CreateElement): VNode {
         return <div class="footer">
-            <span class="author">Copyright - {Config.author}@{new Date().getFullYear()}丨{Config.email}</span>
+            <span class="author">Copyright © {new Date().getFullYear()} - {Config.author}丨{Config.email}</span>
         </div>;
     }
 }
