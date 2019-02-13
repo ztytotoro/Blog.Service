@@ -31,7 +31,14 @@ namespace Server.Base
         [HttpGet("{id}")]
         public virtual ActionResult<U> Get(int id)
         {
-            return Ok(_table.Where(x => x.Id == id).FirstOrDefault());
+            try
+            {
+                return Ok(_table.Where(x => x.Id == id).FirstOrDefault());
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [Authorize]

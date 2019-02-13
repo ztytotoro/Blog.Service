@@ -14,6 +14,13 @@ namespace Server.DataAccess
 
 namespace Server.Models
 {
+    public enum PostType
+    {
+        Draft,
+        Post,
+        Column
+    }
+
     public class Post : BaseEntity
     {
         // 标题
@@ -27,6 +34,8 @@ namespace Server.Models
         public DateTime? LastEditTime { get; set; }
         // 正文
         public string Content { get; set; }
+        public PostType type { get; set; }
+        public int? ColumnId { get; set; }
 
         public List<PostTag> PostTags { get; set; }
         public List<Comment> Comments { get; set; }

@@ -5,6 +5,7 @@ using Server.DataAccess;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Server.Base;
+using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,7 +20,8 @@ namespace Server.Controllers
         [HttpGet]
         public override ActionResult<IEnumerable<Post>> Get()
         {
-            return Ok(_table.Include(x => x.PostTags).ThenInclude(x => x.Tag).Include(x => x.VisitRecords).Select(p => new {
+            return Ok(_table.Include(x => x.PostTags).ThenInclude(x => x.Tag).Include(x => x.VisitRecords).Select(p => new
+            {
                 p.Id,
                 p.Author,
                 p.Title,
@@ -35,7 +37,14 @@ namespace Server.Controllers
         [HttpGet("{id}")]
         public override ActionResult<Post> Get(int id)
         {
-            return Ok(_table.Where(x => x.Id == id).Include(x => x.PostTags).Include(x => x.Comments).Include(x => x.Histories).FirstOrDefault());
+            try
+            {
+                return Ok(_table.Where(x => x.Id == id).Include(x => x.PostTags).Include(x => x.Comments).Include(x => x.Histories).FirstOrDefault());
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
     }
 }
