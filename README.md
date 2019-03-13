@@ -2,9 +2,9 @@ For some reason, I decide to rebuild my bolg to record my journey of coding.
 
 The initial plan is:
 
-* Posts will be maintained here.
+* This repository is used to track issues only(now).
 
-* Source code will private at first(GitHub or Azure OpsDev).
+* Source code will be private at first(GitHub or Azure OpsDev).
 
 * Vue.js for front end.
 
