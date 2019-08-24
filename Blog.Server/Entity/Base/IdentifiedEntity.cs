@@ -2,7 +2,7 @@
 
 namespace Database.Base
 {
-    public class IdentifiedEntity<TInfo> : EntityBase where TInfo : I18nEntity
+    public abstract class IdentifiedEntity<TInfo> : EntityBase where TInfo : I18nEntity
     {
         public string IdentityName { get; set; }
 

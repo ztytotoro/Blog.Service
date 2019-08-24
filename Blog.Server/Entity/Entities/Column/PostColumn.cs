@@ -7,6 +7,7 @@ namespace Database.Entities
         [Key]
         public string ColumnId { get; set; }
         public string PostId { get; set; }
+        public int Order { get; set; }
 
         public Column Column { get; set; }
 

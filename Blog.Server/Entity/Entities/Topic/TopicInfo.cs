@@ -1,5 +1,4 @@
-﻿using Common.Enums;
-using Database.Base;
+﻿using Database.Base;
 
 namespace Database.Entities
 {

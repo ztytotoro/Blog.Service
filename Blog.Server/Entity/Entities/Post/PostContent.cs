@@ -1,5 +1,5 @@
-﻿using Common.Enums;
-using Database.Base;
+﻿using Database.Base;
+using System.Collections.Generic;
 
 namespace Database.Entities
 {
@@ -8,5 +8,7 @@ namespace Database.Entities
         public string PostId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+
+        public List<PostHistory> Histories { get; set; }
     }
 }

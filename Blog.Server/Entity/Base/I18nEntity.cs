@@ -2,7 +2,7 @@
 
 namespace Database.Base
 {
-    public class I18nEntity : EntityBase
+    public abstract class I18nEntity : EntityBase
     {
         public Language Language { get; set; }
     }

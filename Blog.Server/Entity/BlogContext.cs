@@ -16,6 +16,9 @@ namespace Database
                     .WithOne(e => e.Parent)
                     .HasForeignKey(e => e.ParentId);
             });
+
+            modelBuilder.Entity<PostTopic>()
+                .HasKey(t => new { t.PostId, t.TopicId });
         }
 
         #region Author
@@ -32,6 +35,7 @@ namespace Database
         #region Post
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostContent> PostContents { get; set; }
+        public DbSet<PostHistory> PostHistories { get; set; }
         #endregion
 
         #region Topic
