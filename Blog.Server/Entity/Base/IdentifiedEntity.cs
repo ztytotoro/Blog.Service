@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Database.Base
 {
-    public class IdentifiedEntity : EntityBase
+    public class IdentifiedEntity<TInfo> : EntityBase where TInfo : I18nEntity
     {
         public string IdentityName { get; set; }
+
+        public List<TInfo> Contents { get; set; }
     }
 }
