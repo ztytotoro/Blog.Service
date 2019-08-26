@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Database
@@ -12,7 +11,7 @@ namespace Database
 
             var context = scope.ServiceProvider.GetService<BlogContext>();
 
-            context.Database.Migrate();
+            context.Database.EnsureCreated();
         }
     }
 }
