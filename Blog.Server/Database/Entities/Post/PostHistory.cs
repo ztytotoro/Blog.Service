@@ -1,5 +1,6 @@
 ﻿using Database.Base;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Entities
 {
@@ -8,6 +9,7 @@ namespace Database.Entities
         public string PostContentId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime EditTime { get; set; }
         public string EditorId { get; set; }
 
