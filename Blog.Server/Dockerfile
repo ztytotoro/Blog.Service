@@ -8,6 +8,7 @@ COPY ["Blog.Server/Blog.Server.csproj", "Blog.Server/"]
 COPY ["DataTransfer/DataTransfer.csproj", "DataTransfer/"]
 COPY ["Common/Common.csproj", "Common/"]
 COPY ["Database/Database.csproj", "Database/"]
+COPY ["ApiDocument/ApiDocument.csproj", "ApiDocument/"]
 RUN dotnet restore "Blog.Server/Blog.Server.csproj"
 COPY . .
 WORKDIR "/src/Blog.Server"
