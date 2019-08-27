@@ -26,6 +26,7 @@
     <ProjectReference Include="..\ApiDocument\ApiDocument.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Database\Database.csproj" />
+    <ProjectReference Include="..\DataManager\DataManager.csproj" />
     <ProjectReference Include="..\DataTransfer\DataTransfer.csproj" />
   </ItemGroup>
 

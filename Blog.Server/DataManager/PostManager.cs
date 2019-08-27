@@ -1,6 +1,7 @@
 ﻿using Common.Enums;
 using Database;
 using Database.Base;
+using Database.Entities;
 using DataManager.Base;
 using DataTransfer;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,16 @@ namespace DataManager
 {
     public class PostManager : ManagerBase
     {
-        public PostManager(BlogContext context) : base(context) { }
+        private readonly TopicManager _topicManager;
+        private readonly ColumnManger _columnManger;
+        private readonly AuthorManager _authorManager;
+
+        public PostManager(BlogContext context, TopicManager topicManager, ColumnManger columnManger, AuthorManager authorManager) : base(context)
+        {
+            _topicManager = topicManager;
+            _columnManger = columnManger;
+            _authorManager = authorManager;
+        }
 
         public IEnumerable<PostDto> GetAllPosts(Language language)
         {
@@ -25,10 +35,9 @@ namespace DataManager
 
         public PostDetailDto GetPostDetail(string id, Language language)
         {
-            var post = _context.Posts.Include(p => p.Contents).SingleOrDefault(x => x.Id == id);
-            var content = post.Contents.GetByLanguage(language);
-            var column = _context.PostColumns.Include(pc => pc.Column).ThenInclude(c => c.Contents).SingleOrDefault(pc => pc.PostId == post.Id).Column.Contents.GetByLanguage(language);
-            var topics = _context.PostTopics.Include(pt => pt.Topic).ThenInclude(t => t.Contents).Where(pt => pt.PostId == post.Id).Select(pt => pt.Topic);
+            var post = GetPost(id);
+            var content = GetPostContent(post, language);
+
             return new PostDetailDto
             {
                 Id = post.Id,
@@ -36,22 +45,29 @@ namespace DataManager
                 CreateTime = post.CreateTime,
                 UpdateTime = content.LastUpdated,
                 Content = content.Content,
-                Author = new AuthorDto
-                {
-                    Id = post.Author.Id,
-                    Name = post.Author.Contents.GetByLanguage(language).Name
-                },
-                Column = new ColumnDto
-                {
-                    Id = column.Id,
-                    Name = column.Name
-                },
-                Topics = topics.Select(t => new TopicDto
-                {
-                    Id = t.Id,
-                    Name = t.Contents.GetByLanguage(language).Name
-                }).ToList()
+                Author = _authorManager.GetPostAuthor(post.Id, language),
+                Column = _columnManger.GetPostColumn(post.Id, language),
+                Topics = _topicManager.GetPostTopics(post.Id, language)
             };
+        }
+
+        public Post GetPost(string id)
+        {
+            return _context.Posts
+                .Include(p => p.Contents)
+                .SingleOrDefault(x => x.Id == id);
+        }
+
+        public PostContent GetPostContent(string id, Language language)
+        {
+            return _context.Posts
+                .Include(p => p.Contents)
+                .SingleOrDefault(x => x.Id == id).Contents.GetByLanguage(language);
+        }
+
+        public PostContent GetPostContent(Post post, Language language)
+        {
+            return post.Contents.GetByLanguage(language);
         }
     }
 }
