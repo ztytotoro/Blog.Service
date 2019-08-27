@@ -1,4 +1,5 @@
-﻿using Common.Enums;
+﻿using Blog.Server.Base;
+using Common.Enums;
 using Database;
 using DataTransfer;
 using Microsoft.AspNetCore.Mvc;
@@ -8,15 +9,9 @@ using System.Linq;
 
 namespace Blog.Server.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PostController : ControllerBase
+    public class PostController : BaseController
     {
-        private readonly BlogContext _context;
-        public PostController(BlogContext context)
-        {
-            _context = context;
-        }
+        public PostController(BlogContext context) : base(context) { }
 
         [HttpGet]
         public IEnumerable<PostDto> GetAll(Language language)

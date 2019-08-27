@@ -9,10 +9,4 @@
     <PackageReference Include="NSwag.AspNetCore" Version="13.0.6" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
-      <HintPath>..\References\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
