@@ -4,7 +4,7 @@ services:
   blog.server:
     image: ${DOCKER_REGISTRY-}blogserver
     build:
-      context: .
+      context: ..
       dockerfile: Blog.Server/Dockerfile
     ports:
       - "8060:80"
