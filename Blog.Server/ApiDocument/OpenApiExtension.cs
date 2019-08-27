@@ -8,7 +8,7 @@ namespace ApiDocument
     {
         public static void AddApiDocument(this IServiceCollection services)
         {
-            services.AddOpenApiDocument();
+            services.AddOpenApiDocument(configure => configure.Title = "Blog API Overview");
         }
 
         public static void AddJson(this IMvcBuilder mvcBuilder)
@@ -20,6 +20,7 @@ namespace ApiDocument
         {
             app.UseOpenApi();
             app.UseSwaggerUi3();
+            app.UseReDoc(configure => configure.Path = "/redoc");
         }
     }
 }

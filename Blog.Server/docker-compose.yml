@@ -1,8 +1,11 @@
-version: "3.7"
+version: '3.7'
 
 services:
-  api:
-    build: .
+  blog.server:
+    image: ${DOCKER_REGISTRY-}blogserver
+    build:
+      context: .
+      dockerfile: Blog.Server/Dockerfile
     ports:
       - "8060:80"
     depends_on:

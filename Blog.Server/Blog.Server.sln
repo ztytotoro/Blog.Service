@@ -11,13 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTransfer", "DataTransfe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{A8B3165C-FBCA-4C45-9FDE-09953C62A83D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{CEB01F00-E700-4D55-B7F7-D93856254FE5}"
-	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
-		Dockerfile = Dockerfile
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDocument", "ApiDocument\ApiDocument.csproj", "{8E4B5F18-34A0-4C60-B88C-96B7F75E1970}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDocument", "ApiDocument\ApiDocument.csproj", "{8E4B5F18-34A0-4C60-B88C-96B7F75E1970}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{95ACCF81-3BD8-45C2-B2ED-C91C2739D9A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +41,10 @@ Global
 		{8E4B5F18-34A0-4C60-B88C-96B7F75E1970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E4B5F18-34A0-4C60-B88C-96B7F75E1970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E4B5F18-34A0-4C60-B88C-96B7F75E1970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95ACCF81-3BD8-45C2-B2ED-C91C2739D9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95ACCF81-3BD8-45C2-B2ED-C91C2739D9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95ACCF81-3BD8-45C2-B2ED-C91C2739D9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95ACCF81-3BD8-45C2-B2ED-C91C2739D9A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
