@@ -8,11 +8,15 @@ namespace Database.Entities
     public class PostContent : I18nEntity
     {
         public string PostId { get; set; }
+        public string AuthorId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime CreateTime { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastUpdated { get; set; }
 
+        public Author Author { get; set; }
         public List<PostHistory> Histories { get; set; }
     }
 }

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DataTransfer.Base;
 
 namespace DataTransfer
 {
-    public class AddPostDto
+    public class AddPostDto : IdentifiedDto
     {
+
     }
 }
