@@ -18,7 +18,7 @@ namespace DataManager
             return _context.PostTopics.Where(pt => pt.PostId == postId).Include(pt => pt.Topic).Select(pt => new TopicDto
             {
                 Id = pt.Topic.Id,
-                Name = pt.Topic.Contents.GetLocalized(language).Name
+                Name = pt.Topic.GetLocalizedContent(language).Name
             }).ToList();
         }
     }
