@@ -4,6 +4,5 @@ namespace DataTransfer
 {
     public class AddPostDto : IdentifiedDto
     {
-
     }
 }

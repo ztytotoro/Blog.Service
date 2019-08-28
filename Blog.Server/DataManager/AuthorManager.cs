@@ -14,11 +14,17 @@ namespace DataManager
 
         public AuthorDto GetPostAuthor(string postId, Language language)
         {
-            return _context.Posts.Include(p => p.Author).SingleOrDefault(p => p.Id == postId).Author.Map(a => new AuthorDto
-            {
-                Id = a.Id,
-                Name = a.Contents.GetByLanguage(language).Name
-            });
+            return _context.Posts
+                .Include(p => p.Contents)
+                    .ThenInclude(content => content.Author)
+                .SingleOrDefault(p => p.Id == postId)
+                .GetLocalizedContent(language)
+                    .Author
+                    .Map(a => new AuthorDto
+                    {
+                        Id = a.Id,
+                        Name = a.GetLocalizedContent(language).Name
+                    });
         }
     }
 }

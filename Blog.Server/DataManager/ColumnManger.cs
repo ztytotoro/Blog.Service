@@ -17,7 +17,7 @@ namespace DataManager
             return _context.PostColumns
                 .Include(pc => pc.Column)
                     .ThenInclude(c => c.Contents)
-                .SingleOrDefault(pc => pc.PostId == postId).Column.Contents.GetByLanguage(language).Map(c => new ColumnDto
+                .SingleOrDefault(pc => pc.PostId == postId).Column.Contents.GetLocalized(language).Map(c => new ColumnDto
                 {
                     Id = c.Id,
                     Name = c.Name

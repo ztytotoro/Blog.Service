@@ -25,12 +25,12 @@ namespace DataManager
 
         public IEnumerable<PostDto> GetAllPosts(Language language)
         {
-            return _context.Posts.Include(p => p.Contents).OrderByDescending(p => p.CreateTime).Select(p => new PostDto
+            return _context.Posts.Include(p => p.Contents).Select(p => new PostDto
             {
                 Id = p.Id,
-                Title = p.Contents.SingleOrDefault(pc => pc.Language == language).Title,
-                CreateTime = p.CreateTime
-            });
+                Title = p.GetLocalizedContent(language).Title,
+                CreateTime = p.GetLocalizedContent(language).CreateTime
+            }).OrderByDescending(p => p.CreateTime);
         }
 
         public PostDetailDto GetPostDetail(string id, Language language)
@@ -41,8 +41,9 @@ namespace DataManager
             return new PostDetailDto
             {
                 Id = post.Id,
+                IdentityName = post.IdentityName,
                 Title = content.Title,
-                CreateTime = post.CreateTime,
+                CreateTime = content.CreateTime,
                 UpdateTime = content.LastUpdated,
                 Content = content.Content,
                 Author = _authorManager.GetPostAuthor(post.Id, language),
@@ -62,12 +63,12 @@ namespace DataManager
         {
             return _context.Posts
                 .Include(p => p.Contents)
-                .SingleOrDefault(x => x.Id == id).Contents.GetByLanguage(language);
+                .SingleOrDefault(x => x.Id == id).GetLocalizedContent(language);
         }
 
         public PostContent GetPostContent(Post post, Language language)
         {
-            return post.Contents.GetByLanguage(language);
+            return post.GetLocalizedContent(language);
         }
     }
 }
