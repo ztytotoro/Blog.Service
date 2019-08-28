@@ -1,6 +1,5 @@
 ﻿using Blog.Server.Base;
 using Common.Enums;
-using Database;
 using DataManager;
 using DataTransfer;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +11,7 @@ namespace Blog.Server.Controllers
     {
         private readonly PostManager _postManager;
 
-        public PostController(BlogContext context, PostManager postManager) : base(context)
+        public PostController(PostManager postManager)
         {
             _postManager = postManager;
         }
