@@ -21,5 +21,17 @@ namespace Blog.Server.Controllers
         {
             return _postManager.GetAllPosts(language);
         }
+
+        [HttpPost]
+        public IActionResult AddPost(AddPostDto dto)
+        {
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult AddPostContent(AddPostContentDto dto)
+        {
+            return Ok();
+        }
     }
 }
