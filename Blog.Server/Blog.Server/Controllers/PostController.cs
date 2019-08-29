@@ -28,7 +28,7 @@ namespace Blog.Server.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPost("Content")]
         public IActionResult AddPostContent(AddPostContentDto dto)
         {
             return Ok();

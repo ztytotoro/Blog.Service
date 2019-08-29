@@ -12,6 +12,6 @@ namespace DataTransfer
         public string Content { get; set; }
         public string AuthorId { get; set; }
         public string ColumnId { get; set; }
-        public List<string> topicIds { get; set; }
+        public List<string> TopicIds { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Database.Entities.Visitor
 {
-    class Visitor
+    public class Visitor
     {
     }
 }
