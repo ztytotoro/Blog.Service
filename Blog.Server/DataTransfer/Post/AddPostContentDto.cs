@@ -1,5 +1,4 @@
 ﻿using Common.Enums;
-using DataTransfer.Base;
 using System.Collections.Generic;
 
 namespace DataTransfer
