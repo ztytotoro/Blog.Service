@@ -8,5 +8,6 @@ namespace Database.Entities.Visitor
         public DateTime EnterTime { get; set; }
         public DateTime LeaveTime { get; set; }
         public string Path { get; set; }
+        public string PostContentId { get; set; }
     }
 }
