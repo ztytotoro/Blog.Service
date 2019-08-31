@@ -3,6 +3,7 @@ version: '3.7'
 services:
   blog.server:
     image: ${DOCKER_REGISTRY-}blogserver
+    restart: always
     build:
       context: ..
       dockerfile: Blog.Service/Dockerfile
