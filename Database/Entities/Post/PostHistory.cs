@@ -7,6 +7,7 @@ namespace Database.Entities
     public class PostHistory : EntityBase
     {
         public string PostContentId { get; set; }
+        public int Version { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
