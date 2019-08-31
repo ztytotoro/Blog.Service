@@ -1,11 +1,11 @@
-﻿using Blog.Server.Base;
+﻿using Blog.Service.Base;
 using Common.Enums;
 using DataManager;
 using DataTransfer;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace Blog.Server.Controllers
+namespace Blog.Service.Controllers
 {
     public class PostController : BaseController
     {

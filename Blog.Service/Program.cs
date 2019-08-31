@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Blog.Server
+namespace Blog.Service
 {
     public class Program
     {

@@ -1,8 +1,8 @@
-﻿using Blog.Server.Base;
+﻿using Blog.Service.Base;
 using DataTransfer;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Blog.Server.Controllers
+namespace Blog.Service.Controllers
 {
     public class VisitorController : BaseController
     {

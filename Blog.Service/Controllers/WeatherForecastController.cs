@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Blog.Server.Controllers
+namespace Blog.Service.Controllers
 {
     [ApiController]
     [Route("[controller]")]
