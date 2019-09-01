@@ -10,9 +10,13 @@ pool:
   vmImage: 'Ubuntu-latest'
 
 steps:
+- task: CopyFiles@2
+  inputs:
+    Contents: './Blog.Service/Dockerfile'
+    TargetFolder: './'
 - task: Docker@2
   displayName: Build
   inputs:
     repository: $(imageName)
     command: build
-    Dockerfile: ./Blog.Service/Dockerfile
+    Dockerfile: ./Dockerfile
