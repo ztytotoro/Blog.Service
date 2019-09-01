@@ -7,15 +7,17 @@ trigger:
 - dev
 
 pool:
-  vmImage: 'ubuntu-latest'
-
-variables:
-  buildConfiguration: 'Release'
+  vmImage: 'Ubuntu-latest'
 
 steps:
-- task: DotNetCoreInstaller@0
-  displayName: 'Install .net core 3.0 (preview)'
+- task: CopyFiles@2
   inputs:
-    version: '3.0.100-preview8-013656'
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+    SourceFolder: './Blog.Service'
+    Contents: 'Dockerfile'
+    TargetFolder: './'
+- task: Docker@2
+  displayName: Build
+  inputs:
+    repository: $(imageName)
+    command: build
+    Dockerfile: ./Dockerfile
