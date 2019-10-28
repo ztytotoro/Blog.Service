@@ -25,13 +25,13 @@ namespace Blog.Service.Controllers
         [HttpPost]
         public IActionResult AddPost(AddPostDto dto)
         {
-            return Ok();
+            return Ok(dto);
         }
 
         [HttpPost("Content")]
         public IActionResult AddPostContent(AddPostContentDto dto)
         {
-            return Ok();
+            return Ok(dto);
         }
     }
 }
