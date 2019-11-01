@@ -4,12 +4,12 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
-COPY ["Blog.Service/Blog.Service.csproj", "Blog.Service/"]
 COPY ["ApiDocument/ApiDocument.csproj", "ApiDocument/"]
-COPY ["DataTransfer/DataTransfer.csproj", "DataTransfer/"]
+COPY ["Blog.Service/Blog.Service.csproj", "Blog.Service/"]
 COPY ["Common/Common.csproj", "Common/"]
 COPY ["Database/Database.csproj", "Database/"]
 COPY ["DataManager/DataManager.csproj", "DataManager/"]
+COPY ["DataTransfer/DataTransfer.csproj", "DataTransfer/"]
 RUN dotnet restore "Blog.Service/Blog.Service.csproj"
 COPY . .
 WORKDIR "/src/Blog.Service"
