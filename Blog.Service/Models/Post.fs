@@ -14,5 +14,6 @@ type Post =
       Name: string
       Tags: string[]
       Author: string
+      CreateTime: DateTime
       LastUpdateTime: DateTime
       Content: string }

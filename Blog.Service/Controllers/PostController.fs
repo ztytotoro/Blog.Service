@@ -11,7 +11,7 @@ type PostController (_postService: PostService) =
 
     [<HttpGet>]
     member this.Get() =
-        this.Ok([])
+        this.Ok(_postService.Get())
 
     [<HttpPost>]
     member this.Create(post: Post) =

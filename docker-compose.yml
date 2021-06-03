@@ -3,7 +3,7 @@ version: '3.4'
 services:
   blog.service:
     ports:
-        - 8080:80
+        - 8060:80
     image: ${DOCKER_REGISTRY-}blogservice
     build:
       context: .
