@@ -20,6 +20,8 @@ type Startup(configuration: IConfiguration) =
 
         services
             .AddSingleton<PostService>() |> ignore
+
+        services.AddCors() |> ignore
         // Add framework services.
         services.AddControllers() |> ignore
 
@@ -28,6 +30,7 @@ type Startup(configuration: IConfiguration) =
         if (env.IsDevelopment()) then
             app.UseDeveloperExceptionPage() |> ignore
         app.UseRouting()
+           .UseCors(fun p -> p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin() |> ignore)
            .UseAuthorization()
            .UseEndpoints(fun endpoints ->
                  endpoints.MapControllers() |> ignore
