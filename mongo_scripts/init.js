@@ -6,6 +6,8 @@ db.createUser({
 
 db.createCollection('Posts', { capped: false });
 
+db.Posts.createIndex( { "Name": 1, "Ver": 1 }, { unique: true } )
+
 db.Posts.insert([
   {
     Title: 'Hello',

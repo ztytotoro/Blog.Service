@@ -4,6 +4,7 @@ open System
 open MongoDB.Bson.Serialization.Attributes
 open MongoDB.Bson
 
+[<CLIMutable>]
 type Post =
     {
       [<BsonId>]
